@@ -1,6 +1,13 @@
 const express = require('express');
 const app = express();
 const connectDB = require('./config/db');
+
+connectDB();
+
+//midlewere
+app.use(express.json({extended: false}));
+
+//test router index
 app.get('/', (req, res) => res.json('API is Works!'));
 
 // Define Routes
@@ -10,7 +17,7 @@ app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/posts', require('./routes/api/posts'));
 
 //call connectDB
-connectDB();
+
 
 
 const PORT = process.env.PORT || 5000;

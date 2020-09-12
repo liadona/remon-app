@@ -1,3 +1,6 @@
 {
-    "mongoURI": "mongodb+srv://sabat:qwertyuiop@my-project.yv9yd.mongodb.net/<dbname>?retryWrites=true&w=majority"
+    "mongoURI": "mongodb+srv://sabat:qwertyuiop@my-project.yv9yd.mongodb.net/<dbname>?retryWrites=true&w=majority",
+    "jwtSecret": "mysecrettoken",
+    "githubClientId": "5621c203f3d32b685fda",
+    "githubSecret": "1ee5019f33b124ab580a05190d86f9b30177a7f6"
 }
