@@ -1,32 +1,41 @@
-import React from 'react';
-import { Fragment, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
-const Register = () => {
-    const [ formData, setFormData ] = useState({
-        name: '',
-        email: '',
-        password: '',
-        password2: ''
-        });
-       
-    const { name, email, password, password2 } = formData;
-    const onChange = e =>
+import { connect } from 'react-redux';
+import { setAlert } from '../../actions/alert'; 
+import { register } from '../../actions/auth'; 
+import PropTypes from 'prop-types';
+
+
+
+const Register = ({ setAlert, register }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    password2: ''
+  });
+
+  const { name, email, password, password2 } = formData;
+
+  const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = e => {
     e.preventDefault();
     if (password !== password2) {
-      console.log('Password do not match');
+      setAlert('Password do not match', 'danger');
     } else {
-      console.log(formData);
+      //console.log(formData);
+      register({name, email, password})
     }
   };
- return (
+
+  return (
     <Fragment>
-        <section className="container">
-            <h1 className="large text-primary">Sign Up</h1>
-            <p className="lead"><i class="fas fa-user"></i> Create Your Account</p>
-            <form className="form" onSubmit={e => onSubmit(e)}>
+      <section className="container">
+        <h1 className="large text-primary">Sign Up</h1>
+        <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
+        <form className="form" onSubmit={e => onSubmit(e)}>
           <div className="form-group">
             <input
               type="text"
@@ -70,10 +79,17 @@ const Register = () => {
           <input type="submit" className="btn btn-primary" value="Register" />
         </form>
         <p className="my-1">
-          Already have an account? <a href="login.html">Sign In</a>
-            </p>
-        </section>
+          Already have an account? <Link to="/login">Sign In</Link>
+        </p>
+      </section>
     </Fragment>
- )
-};
-export default Register;
+  )
+}
+
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired
+
+}
+
+export default connect(null, { setAlert, register })(Register);
