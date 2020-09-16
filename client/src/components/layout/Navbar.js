@@ -35,7 +35,7 @@ const authLinks = (
  return (
     <nav className="navbar bg-dark">
         <h1>
-            <a href="/"><i className="fas fa-code"></i> Remonds App</a>
+            <a href="/"><i className="fa fa-code"></i> Remonds App</a>
         </h1>
         { !loading && (<Fragment>{ isAuthenticated ? authLinks : guestLinks }
         </Fragment>) }
