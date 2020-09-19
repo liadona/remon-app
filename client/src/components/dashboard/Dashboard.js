@@ -5,6 +5,8 @@ import { getCurrentProfile } from '../../actions/profile';
 import Spinner from '../layout/Spinner';
 import { Link } from 'react-router-dom';
 import DashboardAction from './DashboardAction';
+import Experience from './Experience';
+import Education from './Education';
 
 
 //import PropTypes from 'prop-types';
@@ -16,7 +18,10 @@ const Dashboard = ({ getCurrentProfile,
         getCurrentProfile();
         }, []);
        
- return loading && profile === null ? <Spinner/> : <Fragment>
+ return loading && profile === null ? <Spinner/> : <Fragment> 
+     <br />
+     <br />
+     <br />
  <h1 className="large text-primary">Dashboard</h1>
  <p className="lead">
  <i className="fas fa-user"></i>
@@ -25,9 +30,13 @@ const Dashboard = ({ getCurrentProfile,
 { profile !== null ? (
     <Fragment>
         <DashboardAction />
+        <Experience experience={profile.experience} />
+        <Education education={profile.education} />      
+        
     </Fragment>
 ) : (
     <Fragment>
+        
         <p>anda belum memiliki profile, isi profile anda disini</p>
         <Link to="/create-profile" className="btn btn-primary my-1">
             Create Profile
