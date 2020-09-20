@@ -8,6 +8,7 @@ const User =require('../models/User')
 
 const request = require('request');
 const config = require('config');
+const Post = require('../models/Post');
 
 
 // @routeGET api/profile/me
@@ -137,7 +138,7 @@ router.get('/', async (req, res) => {
 // @access	Public
 router.get('/user/:user_id', async (req, res) => {
   try {
-    const profile = await Profile.find({ user: req.params.user_id }).populate('user', ['name', 'avatar']);
+    const profile = await Profile.findOne({ user: req.params.user_id }).populate('user', ['name', 'avatar']);
 
     if (!profile) return res.status(400).json({ msg: 'Profile tidak ditemukan' });
 
@@ -158,6 +159,9 @@ router.get('/user/:user_id', async (req, res) => {
 // @access Private
 router.delete('/', auth, async (req, res) => {
   try {
+  // remove user post
+  await Post.deleteMany({user: req.user_id});
+
   // Remove profile
   await Profile.findOneAndRemove({ user: req.user.id });
  

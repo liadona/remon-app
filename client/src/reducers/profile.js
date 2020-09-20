@@ -1,8 +1,10 @@
 import {
     GET_PROFILE,
+    GET_PROFILES,
     PROFILE_ERROR,
     CLEAR_PROFILE,
-    UPDATE_PROFILE
+    UPDATE_PROFILE,
+    GET_REPOS
    } from '../actions/types';
 
 
@@ -23,8 +25,14 @@ import {
         ...state,
         profile: payload,
         loading: false
-    };
-    case PROFILE_ERROR:
+    }
+    case GET_PROFILES:
+    return {
+        ...state,
+        profiles: payload,
+        loading: false
+    }
+    case PROFILE_ERROR:    
     return {
         ...state,
         error: payload,
@@ -37,6 +45,12 @@ import {
         repo: [],
         loading: false
     };
+    case GET_REPOS:
+        return {
+        ...state,
+        repos: payload,
+        loading: false
+        }
     default:
     return state;
     }
