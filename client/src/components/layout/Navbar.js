@@ -14,6 +14,11 @@ const authLinks = (
                     Members
                 </Link>
             </li>
+            <li>
+                <Link to='/posts'>
+                    Posts
+                </Link>
+            </li>
             <li><Link to="/dashboard">
                 <i className='fas fa-user' />{' '}
                 <span className='hide-sm'>Dashboard</span>
